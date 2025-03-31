@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Grail Layout</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            display: grid;
+            grid-template-areas:
+                "header header header"
+                "nav main aside"
+                "footer footer footer";
+            grid-template-rows: 80px 1fr 50px;
+            grid-template-columns: 200px 1fr 200px;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            grid-area: header;
+            background: #4CAF50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav {
+            grid-area: nav;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        main {
+            grid-area: main;
+            padding: 20px;
+        }
+
+        aside {
+            grid-area: aside;
+            background: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        footer {
+            grid-area: footer;
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        img {
+            max-width: 200px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Website</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Bubble Sort Demo</h2>
+        <input type="text" id="numbers" placeholder="Enter numbers, comma separated">
+        <button onclick="sortNumbers()">Sort</button>
+        <p>Sorted Output: <span id="sortedOutput"></span></p>
+    </main>
+    <aside>
+        <a href="https://www.amazon.com/dp/B08N5WRWNW" target="_blank">
+            <img src="Kolhatkar-FTC-Amazon.webp" alt="Advertisement">
+        </a>
+    </aside>
+    <footer>
+        <p>Last updated: <span id="lastModified"></span></p>
+    </footer>
+    <script>
+        document.getElementById('lastModified').textContent = document.lastModified;
+    </script>
+    <script>
+        function sortNumbers() {
+            let input = document.getElementById("numbers").value;
+            let numArray = input.split(",").map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+            
+            if (numArray.length === 0) {
+                document.getElementById("sortedOutput").textContent = "Please enter valid numbers.";
+                return;
+            }
+
+            for (let i = 0; i < numArray.length - 1; i++) {
+                for (let j = 0; j < numArray.length - 1 - i; j++) {
+                    if (numArray[j] > numArray[j + 1]) {
+                        [numArray[j], numArray[j + 1]] = [numArray[j + 1], numArray[j]];
+                    }
+                }
+            }
+            
+            document.getElementById("sortedOutput").textContent = numArray.join(", ");
+        }
+    </script>
+</body>
+</html>
